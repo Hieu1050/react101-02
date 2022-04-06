@@ -1,4 +1,8 @@
 export default function Meme (){
+    function handleClick (){
+        
+    }
+
     return (
         <main>
             <form className="form">
@@ -8,7 +12,7 @@ export default function Meme (){
                 <input type = "text" 
                     className="form--inputs" 
                     placeholder="Bottom text" />
-                <button className="form--button"> 
+                <button onClick={handleClick} className="form--button"> 
                     Get a new image
                 </button>
             </form>
