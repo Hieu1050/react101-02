@@ -1,17 +1,20 @@
 
+import { useState } from "react";
 import memesData from "../memesData"
 export default function Meme (){
+    const [imageUrl, setImageUrl] = useState("");
     function handleClick (){
-        let data_len = memesData.data.memes.length;
+        let data_len = memesData.data.memes.length
         let random_image = memesData.data.memes[
             Math.floor (Math.random () * data_len)
-        ];
-        console.log (random_image.url);
+        ]
+        console.log (random_image.url)
+        setImageUrl (random_image.url)
     }
 
     return (
         <main>
-            <form className="form">
+            <div className="form">
                 <input type = "text" 
                     className="form--input" 
                     placeholder="Top text" />
@@ -21,7 +24,8 @@ export default function Meme (){
                 <button onClick={handleClick} className="form--button"> 
                     Get a new image
                 </button>
-            </form>
+            </div>
+            <img src= {imageUrl} className="meme--image"/>
         </main>
     )
 }
