@@ -1,15 +1,28 @@
-
 import { useState } from "react";
 import memesData from "../memesData"
 export default function Meme (){
-    const [imageUrl, setImageUrl] = useState("");
+    const [meme, setMeme] = useState (
+        {
+            "topText": "",
+            "bottomText": "",
+            "randomImage": "http://i.imgflip.com/1bij.jpg"
+        }
+    ) // hook state to a dictionary object meme with 3 keys
+    const [allMemeImages, setAllMemeImages] = useState (memesData) 
+    
     function handleClick (){
-        let data_len = memesData.data.memes.length
-        let random_image = memesData.data.memes[
+        // 1- get a new image url for the meme by picking a random index
+        let data_len = allMemeImages.data.memes.length
+        let random_image_url = allMemeImages.data.memes[
             Math.floor (Math.random () * data_len)
-        ]
-        console.log (random_image.url)
-        setImageUrl (random_image.url)
+        ].url
+
+        // 2- set the new url for the meme object, while keeping the topText and bottomText the same
+        setMeme (prevMeme => ({
+            ...prevMeme, // get all the properties of the object
+            randomImage : random_image_url // change the image url
+        }))
+        
     }
 
     return (
@@ -25,7 +38,7 @@ export default function Meme (){
                     Get a new image
                 </button>
             </div>
-            <img src= {imageUrl} className="meme--image"/>
+            <img src= {meme.randomImage} className="meme--image"/>
         </main>
     )
 }
